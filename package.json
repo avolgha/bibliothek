@@ -1,0 +1,18 @@
+{
+  "name": "bibliothek",
+  "version": "1.0.0",
+  "description": "library containing some things",
+  "main": "build/main.js",
+  "author": "avolgha",
+  "license": "MIT",
+	"type": "module",
+  "devDependencies": {
+    "@types/node": "^18.7.3",
+    "regenerator-runtime": "^0.13.9",
+    "tsup": "^6.2.2",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
+  }
+}
