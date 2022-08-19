@@ -47,3 +47,7 @@ export function str_count(input: string, search: string): number {
 
 	return matches.length;
 }
+
+export function str_fmtjson(json: any, config?: { level?: number }): string {
+	throw "method not implemented.";
+}

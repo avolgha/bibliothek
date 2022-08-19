@@ -44,7 +44,7 @@ export class BoundNumber {
 	#value: number;
 	private throwOnFalseValue: boolean;
 
-	constructor(private config: BoundNumberConfig) {
+	constructor(config: BoundNumberConfig) {
 		this.bound = config.bound;
 		
 		const [upper, lower] = this.bound;

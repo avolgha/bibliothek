@@ -23,7 +23,7 @@ export function fs_create(path: string) {
 /**
  * Write content to a file.
  *
- * @param The path of the file.
+ * @param path The path of the file.
  * @param content The string you want to write to the file.
  */
 export function fs_write(path: string, content: string) {
@@ -33,7 +33,7 @@ export function fs_write(path: string, content: string) {
 /**
  * Read a file.
  *
- * @param The path of the file.
+ * @param path The path of the file.
  *
  * @return The contents of the file.
  */

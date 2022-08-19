@@ -106,3 +106,19 @@ export function num_between(num: number, upper: number, lower: number): boolean 
 export function num_between_inc(num: number, upper: number, lower: number): boolean {
 	return num_between(num, upper, lower) || num === upper || num === lower;
 }
+
+/**
+ * Generate a random number between two other numbers.
+ *
+ * @param max The maximal possible value.
+ * @param min The minimal possible value. (Default: 0)
+ *
+ * @return The random number.
+ *
+ * @example
+ * num_rand(5, 0);
+ * // => 0 <= x <= 5
+ */
+export function num_rand(max: number, min: number = 0): number {
+	return Math.random() * (max - min) + min;
+}
