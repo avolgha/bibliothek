@@ -1,4 +1,4 @@
-import {  str_fmtjson } from "./string.js";
+import { fmt_json } from "./fmt.js";
 
 /**
  * Simple Logger implementation.
@@ -60,7 +60,7 @@ export class Logger {
 	 * Prit formatted json to the console.
 	 */
 	json(object: any) {
-		this.#print(process.stdout, "[json]", str_fmtjson(object))
+		this.#print(process.stdout, "[json]", fmt_json(object))
 	}
 
 	/**
