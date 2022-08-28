@@ -15,5 +15,17 @@
     },
     "scripts": {
         "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
-    }
+    },
+    "homepage": "https://github.com/avolgha/bibliothek",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/avolgha/bibliothek"
+    },
+    "maintainers": [
+        {
+            "name": "avolgha",
+            "email": "avolgha@gmail.com",
+            "url": "https://github.com/avolgha"
+        }
+    ]
 }
