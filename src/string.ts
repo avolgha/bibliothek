@@ -17,12 +17,16 @@ import leven from "../third_party/leven";
  * str_fmt("Test []", [1], { replace: "[]" });
  * // => "Test 1"
  */
-export function str_fmt(template: string, objects: any[], config: { replace: string } = { replace: "{}" }): string {
-	const { replace } = config;
-	while (template.includes(replace) && objects.length > 0) {
-		template = template.replace(replace, objects.shift());
-	}
-	return template;
+export function str_fmt(
+    template: string,
+    objects: any[],
+    config: { replace: string } = { replace: "{}" }
+): string {
+    const { replace } = config;
+    while (template.includes(replace) && objects.length > 0) {
+        template = template.replace(replace, objects.shift());
+    }
+    return template;
 }
 
 /**
@@ -42,45 +46,57 @@ export function str_fmt(template: string, objects: any[], config: { replace: str
  * // => 0
  */
 export function str_count(input: string, search: string): number {
-	const matches = input.match(new RegExp(search, "g"));
-	if (matches === null) {
-		return 0;
-	}
+    const matches = input.match(new RegExp(search, "g"));
+    if (matches === null) {
+        return 0;
+    }
 
-	return matches.length;
+    return matches.length;
 }
 
 /**
  * Meassure the Levenshtein distance (or edit distance) between two strings.
- * 
+ *
  * **Information**: https://en.wikipedia.org/wiki/Levenshtein_distance
- * 
+ *
  * @param target The first input string.
  * @param search The second input string.
  * @return The distance between the two strings.
  */
 export function str_distance(target: string, search: string): number {
-	return leven(target, search);
+    return leven(target, search);
 }
 
 /**
  * Meassure the Levenshtein distance (or edit distance) between one string and
  * an array of strings and get the nearest strings back.
- * 
+ *
  * @param target The string you want to get the nearest from.
  * @param search The strings you want to search in.
  * @param amount The amount of strings you want to get back. If it is -1 *all*
- * 				 strings will be returned in order. If it is 1 only the first 
- *               will be returned *without an array*. If it is >= 0 an array 
- *               will be returned with the specificed amount of values. 
+ * 				 strings will be returned in order. If it is 1 only the first
+ *               will be returned *without an array*. If it is >= 0 an array
+ *               will be returned with the specificed amount of values.
  *               Otherwise will return `undefined`.
  * @return The nearest string(s)
  */
-export function str_nearest(target: string, search: string[], amount = 1): string | string[] | undefined {
-	if (search.length === 0) return undefined;
-	let distances: { [s: string]: number } = {};
-	const sortedArray = search.sort((first, second) => (distances[first] || (distances[first] = str_distance(first, target))) - (distances[second] || (distances[second] = str_distance(second, target)))).reverse();
-	if (amount === -1) return sortedArray;
-	else if (amount === 1) return sortedArray[0];
-	else if (amount >= 0) return sortedArray.slice(0, amount);
+export function str_nearest(
+    target: string,
+    search: string[],
+    amount = 1
+): string | string[] | undefined {
+    if (search.length === 0) return undefined;
+    let distances: { [s: string]: number } = {};
+    const sortedArray = search
+        .sort(
+            (first, second) =>
+                (distances[first] ||
+                    (distances[first] = str_distance(first, target))) -
+                (distances[second] ||
+                    (distances[second] = str_distance(second, target)))
+        )
+        .reverse();
+    if (amount === -1) return sortedArray;
+    else if (amount === 1) return sortedArray[0];
+    else if (amount >= 0) return sortedArray.slice(0, amount);
 }

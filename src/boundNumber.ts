@@ -4,31 +4,31 @@ import { num_between_inc } from "./number.js";
  * Configuration options for a BoundNumber
  */
 export interface BoundNumberConfig {
-	/**
-	 * The bound rules of the number.
-	 *
-	 * Declaration:
-	 * [ <highest possible>, <lowest possible> ]
-	 *
-	 * @example
-	 * [4, 1]
-	 * // => num > 1 && num < 4
-	 */
-	bound: [number, number];
+    /**
+     * The bound rules of the number.
+     *
+     * Declaration:
+     * [ <highest possible>, <lowest possible> ]
+     *
+     * @example
+     * [4, 1]
+     * // => num > 1 && num < 4
+     */
+    bound: [number, number];
 
-	/**
-	 * The default value on creation.
-	 *
-	 * Default to `0`.
-	 */
-	value?: number;
-	
-	/**
-	 * Whether there should be an exception when the set number does not satisfy the requirements.
-	 *
-	 * Default to `false`.
-	 */
-	throwOnFalseValue?: boolean;
+    /**
+     * The default value on creation.
+     *
+     * Default to `0`.
+     */
+    value?: number;
+
+    /**
+     * Whether there should be an exception when the set number does not satisfy the requirements.
+     *
+     * Default to `false`.
+     */
+    throwOnFalseValue?: boolean;
 }
 
 /**
@@ -40,151 +40,151 @@ export interface BoundNumberConfig {
  * of this library.
  */
 export class BoundNumber {
-	private bound: [number, number];
-	#value: number;
-	private throwOnFalseValue: boolean;
+    private bound: [number, number];
+    #value: number;
+    private throwOnFalseValue: boolean;
 
-	constructor(config: BoundNumberConfig) {
-		this.bound = config.bound;
-		
-		const [upper, lower] = this.bound;
-		if (lower > upper) {
-			throw `Highest possible (${upper}) is lower than the lowest possible (${lower}).`;
-		}
+    constructor(config: BoundNumberConfig) {
+        this.bound = config.bound;
 
-		this.#value = config.value || 0;
-		this.throwOnFalseValue = config.throwOnFalseValue || false;
-	}
+        const [upper, lower] = this.bound;
+        if (lower > upper) {
+            throw `Highest possible (${upper}) is lower than the lowest possible (${lower}).`;
+        }
 
-	get value() {
-		return this.#value;
-	}
+        this.#value = config.value || 0;
+        this.throwOnFalseValue = config.throwOnFalseValue || false;
+    }
 
-	set value(next: number) {
-		const [upper, lower] = this.bound;
+    get value() {
+        return this.#value;
+    }
 
-		if (num_between_inc(next, upper, lower)) {
-			this.#value = next;
-			return;
-		}
+    set value(next: number) {
+        const [upper, lower] = this.bound;
 
-		if (this.throwOnFalseValue) {
-			throw `Given Number (${next}) does not satisfy the requirements: <${upper} and >${lower}.`;
-		}
-	}
+        if (num_between_inc(next, upper, lower)) {
+            this.#value = next;
+            return;
+        }
 
-	/**
-	 * Performs a more complex action on the number.
-	 *
-	 * @example
-	 * boundNumber.action((num) => num / (num + 1));
-	 * // => x / (x + 1)
-	 */
-	action(fn: (input: number) => number) {
-		this.value = fn(this.value);
-	}
+        if (this.throwOnFalseValue) {
+            throw `Given Number (${next}) does not satisfy the requirements: <${upper} and >${lower}.`;
+        }
+    }
 
-	/**
-	 * Increment the number.
-	 *
-	 * @example
-	 * boundNumber.inc();
-	 * // => x++;
-	 */
-	inc() {
-		this.value += 1;
-	}
+    /**
+     * Performs a more complex action on the number.
+     *
+     * @example
+     * boundNumber.action((num) => num / (num + 1));
+     * // => x / (x + 1)
+     */
+    action(fn: (input: number) => number) {
+        this.value = fn(this.value);
+    }
 
-	/**
-	 * Decrement the number.
-	 *
-	 * @example
-	 * boundNumber.dec();
-	 * // => x--
-	 */
-	dec() {
-		this.value -= 1;
-	}
+    /**
+     * Increment the number.
+     *
+     * @example
+     * boundNumber.inc();
+     * // => x++;
+     */
+    inc() {
+        this.value += 1;
+    }
 
-	/**
-	 * Perform the "plus" operation on the number.
-	 *
-	 * @example
-	 * boundNumber.plus(5);
-	 * // => x + 5
-	 */
-	plus(factor: number) {
-		this.value += factor;
-	}
+    /**
+     * Decrement the number.
+     *
+     * @example
+     * boundNumber.dec();
+     * // => x--
+     */
+    dec() {
+        this.value -= 1;
+    }
 
-	/**
-	 * Perform the "minus" operation on the number.
-	 *
-	 * @example
-	 * boundNumber.minus(5);
-	 * // => x - 5
-	 */
-	minus(factor: number) {
-		this.value -= factor;
-	}
+    /**
+     * Perform the "plus" operation on the number.
+     *
+     * @example
+     * boundNumber.plus(5);
+     * // => x + 5
+     */
+    plus(factor: number) {
+        this.value += factor;
+    }
 
-	/**
-	 * Perform the "multiply" operation on the number.
-	 *
-	 * @example
-	 * boundNumber.multiply(5);
-	 * // => x * 5
-	 */
-	multiply(factor: number) {
-		this.value *= factor;
-	}
+    /**
+     * Perform the "minus" operation on the number.
+     *
+     * @example
+     * boundNumber.minus(5);
+     * // => x - 5
+     */
+    minus(factor: number) {
+        this.value -= factor;
+    }
 
-	/**
-	 * Perform the "divide" operation on the number.
-	 *
-	 * @example
-	 * boundNumber.divide(5);
-	 * // => x / 5
-	 */
-	divide(factor: number) {
-		this.value /= factor;
-	}
+    /**
+     * Perform the "multiply" operation on the number.
+     *
+     * @example
+     * boundNumber.multiply(5);
+     * // => x * 5
+     */
+    multiply(factor: number) {
+        this.value *= factor;
+    }
 
-	/**
-	 * Perform the "modulo" operation on the number.
-	 *
-	 * @example
-	 * boundNumber.modulo(5);
-	 * // => x % 5
-	 */
-	modulo(factor: number) {
-		this.value %= factor;
-	}
+    /**
+     * Perform the "divide" operation on the number.
+     *
+     * @example
+     * boundNumber.divide(5);
+     * // => x / 5
+     */
+    divide(factor: number) {
+        this.value /= factor;
+    }
 
-	/**
-	 * Perform the "exponent" operation on the number;
-	 *
-	 * @example
-	 * boundNumber.exponent(5);
-	 * // => x ^ 5
-	 */
-	exponent(factor: number) {
-		this.value = Math.pow(this.value, factor);
-	}
+    /**
+     * Perform the "modulo" operation on the number.
+     *
+     * @example
+     * boundNumber.modulo(5);
+     * // => x % 5
+     */
+    modulo(factor: number) {
+        this.value %= factor;
+    }
 
-	/**
-	 * Set the number to another number without mathematical operations.
-	 */
-	assign(newValue: number) {
-		this.value = newValue;
-	}
+    /**
+     * Perform the "exponent" operation on the number;
+     *
+     * @example
+     * boundNumber.exponent(5);
+     * // => x ^ 5
+     */
+    exponent(factor: number) {
+        this.value = Math.pow(this.value, factor);
+    }
 
-	/**
-	 * Transforms the number to a string.
-	 *
-	 * @param digits The number of digits after the comma.
-	 */
-	str(digits: number = 0): string {
-		return digits <= 0 ? ""+this.value : this.value.toFixed(digits);
-	}
+    /**
+     * Set the number to another number without mathematical operations.
+     */
+    assign(newValue: number) {
+        this.value = newValue;
+    }
+
+    /**
+     * Transforms the number to a string.
+     *
+     * @param digits The number of digits after the comma.
+     */
+    str(digits: number = 0): string {
+        return digits <= 0 ? "" + this.value : this.value.toFixed(digits);
+    }
 }

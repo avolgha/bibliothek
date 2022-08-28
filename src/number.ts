@@ -17,9 +17,9 @@ import { BoundNumber } from "./boundNumber.js";
  * // => [ 5, 6, 7, 8, 9 ]
  */
 export function num_range(from: number, to: number): number[] {
-	const array: number[] = [];
-	for (let n = from; n < to; n++) array.push(n);
-	return array;
+    const array: number[] = [];
+    for (let n = from; n < to; n++) array.push(n);
+    return array;
 }
 
 /**
@@ -35,7 +35,7 @@ export function num_range(from: number, to: number): number[] {
  * iter.next(); // => { done: true }
  */
 export function* num_range_iter(from: number, to: number) {
-	for (let n = from; n < to; n++) yield n;
+    for (let n = from; n < to; n++) yield n;
 }
 
 /**
@@ -55,13 +55,17 @@ export function* num_range_iter(from: number, to: number) {
  * bound.value;
  * // => 6
  */
-export function num_bound(initial: number | undefined, from: number, to: number): BoundNumber {
-	return new BoundNumber({
-		value: initial,
-		// the format we use to specify the bounds is a bit weird.
-		// we require the dev to first put the upper bound and then the lower bound.
-		bound: [to, from],
-	})
+export function num_bound(
+    initial: number | undefined,
+    from: number,
+    to: number
+): BoundNumber {
+    return new BoundNumber({
+        value: initial,
+        // the format we use to specify the bounds is a bit weird.
+        // we require the dev to first put the upper bound and then the lower bound.
+        bound: [to, from],
+    });
 }
 
 /**
@@ -82,8 +86,12 @@ export function num_bound(initial: number | undefined, from: number, to: number)
  * num_between(2, 0, 1);
  * // => false
  */
-export function num_between(num: number, upper: number, lower: number): boolean {
-	return upper > num && num > lower;
+export function num_between(
+    num: number,
+    upper: number,
+    lower: number
+): boolean {
+    return upper > num && num > lower;
 }
 
 /**
@@ -103,8 +111,12 @@ export function num_between(num: number, upper: number, lower: number): boolean 
  * num_between_inc(1, 1, 3);
  * // => true
  */
-export function num_between_inc(num: number, upper: number, lower: number): boolean {
-	return num_between(num, upper, lower) || num === upper || num === lower;
+export function num_between_inc(
+    num: number,
+    upper: number,
+    lower: number
+): boolean {
+    return num_between(num, upper, lower) || num === upper || num === lower;
 }
 
 /**
@@ -120,5 +132,5 @@ export function num_between_inc(num: number, upper: number, lower: number): bool
  * // => 0 <= x <= 5
  */
 export function num_rand(max: number, min: number = 0): number {
-	return Math.random() * (max - min) + min;
+    return Math.random() * (max - min) + min;
 }

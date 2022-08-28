@@ -8,7 +8,7 @@ import fs from "fs";
  * @return Whether the file exists or not.
  */
 export function fs_exists(path: string): boolean {
-	return fs.existsSync(path);
+    return fs.existsSync(path);
 }
 
 /**
@@ -17,7 +17,7 @@ export function fs_exists(path: string): boolean {
  * @param path The path of the file.
  */
 export function fs_create(path: string) {
-	if (!fs_exists(path)) fs_write(path, "");
+    if (!fs_exists(path)) fs_write(path, "");
 }
 
 /**
@@ -27,7 +27,7 @@ export function fs_create(path: string) {
  * @param content The string you want to write to the file.
  */
 export function fs_write(path: string, content: string) {
-	fs.writeFileSync(path, content);
+    fs.writeFileSync(path, content);
 }
 
 /**
@@ -38,7 +38,7 @@ export function fs_write(path: string, content: string) {
  * @return The contents of the file.
  */
 export function fs_read(path: string): string {
-	return fs.readFileSync(path, "utf-8");
+    return fs.readFileSync(path, "utf-8");
 }
 
 /**
@@ -49,5 +49,5 @@ export function fs_read(path: string): string {
  * @return The parsed JSON.
  */
 export function fs_json<T = any>(path: string): T {
-	return JSON.parse(fs_read(path)) as T;
+    return JSON.parse(fs_read(path)) as T;
 }

@@ -6,8 +6,8 @@
  * // => { a: 2, b: 1, c: 3 }
  */
 export function obj_default<A, B>(object: A, defaultObject: B): A & B {
-	return {
-		...defaultObject,
-		...object,
-	};
+    return {
+        ...defaultObject,
+        ...object,
+    };
 }
