@@ -2,7 +2,7 @@
   "name": "bibliothek",
   "version": "1.0.0",
   "description": "library containing some things",
-  "main": "build/main.js",
+  "exports": "./build/main.js",
   "author": "avolgha",
   "license": "MIT",
 	"type": "module",
