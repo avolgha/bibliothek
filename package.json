@@ -10,10 +10,12 @@
     "devDependencies": {
         "@types/node": "^18.7.3",
         "regenerator-runtime": "^0.13.9",
+        "source-map-support": "^0.5.21",
         "tsup": "^6.2.2",
         "typescript": "^4.7.4"
     },
     "scripts": {
+        "start": "node -r source-map-support/register",
         "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
     },
     "homepage": "https://github.com/avolgha/bibliothek",
