@@ -58,7 +58,7 @@ export function fmt_json(json: any): string {
             case "undefined":
                 return _und;
             default:
-                return Array.isArray(some) ? _arr : _obj;
+                return !some ? _und : Array.isArray(some) ? _arr : _obj;
         }
     }
 

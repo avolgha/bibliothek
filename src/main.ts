@@ -6,4 +6,5 @@ export * from "./fs.js";
 export { Logger, log_statement } from "./logger.js";
 export * from "./number.js";
 export * from "./object.js";
+export * from "./os.js";
 export * from "./string.js";
