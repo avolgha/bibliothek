@@ -4,6 +4,7 @@ export { BoundNumber } from "./boundNumber.js";
 export { cfg_load, cfg_save } from "./config";
 export * from "./fmt.js";
 export * from "./fs.js";
+export * from "./lazy.js";
 export { Logger, log_statement } from "./logger.js";
 export * from "./number.js";
 export * from "./object.js";

@@ -1,6 +1,6 @@
 {
     "name": "bibliothek",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "library containing some things",
     "exports": "./build/main.js",
     "types": "./build/main.d.ts",
