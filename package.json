@@ -16,6 +16,7 @@
         "typescript": "^4.7.4"
     },
     "scripts": {
+        "prepareRelease": "node scripts/prepareRelease.js",
         "start": "node -r source-map-support/register",
         "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
     },
