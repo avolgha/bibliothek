@@ -1,6 +1,6 @@
 {
     "name": "bibliothek",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "library containing some things",
     "exports": "./build/main.js",
     "types": "./build/main.d.ts",
@@ -33,6 +33,7 @@
         }
     ],
     "dependencies": {
+        "flat": "^5.0.2",
         "hocon-parser": "^1.0.1",
         "js-yaml": "^4.1.0",
         "leven": "^4.0.0",
