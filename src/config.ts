@@ -1,11 +1,20 @@
 import hocon from "./config/hocon";
 import json from "./config/json";
+import properties from "./config/properties";
 import yaml from "./config/yaml";
 
 /**
  * The type of the configuration.
+ * 
+ * Specifications:
+ * Type|Url
+ * ---|---
+ * JSON|https://www.json.org/json-en.html
+ * Yaml|https://yaml.org/
+ * HOCON|https://github.com/lightbend/config/blob/main/HOCON.md
+ * Properties|<key>=<value>
  */
-export type ConfigType = "json" | "yaml" | "hocon";
+export type ConfigType = "json" | "yaml" | "hocon" | "properties";
 
 const configs: Map<ConfigType, {
     load(file: string): any;
@@ -14,6 +23,7 @@ const configs: Map<ConfigType, {
     ["json", json],
     ["yaml", yaml],
     ["hocon", hocon],
+    ["properties", properties],
 ]);
 
 /**
