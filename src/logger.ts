@@ -1,7 +1,5 @@
 import vm from "vm";
-import picoCreateColors from "../third_party/picocolors";
-//@ts-ignore
-const pico = picoCreateColors();
+import pico from "picocolors";
 import { fmt_json } from "./fmt.js";
 import { obj_default } from "./object.js";
 

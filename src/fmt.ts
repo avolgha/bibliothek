@@ -1,6 +1,4 @@
-import picoCreateColors from "../third_party/picocolors.js";
-//@ts-ignore
-const pico = picoCreateColors();
+import pico from "picocolors";
 
 /**
  * Prettify bytes.

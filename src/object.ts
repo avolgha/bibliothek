@@ -11,3 +11,5 @@ export function obj_default<A, B>(object: A, defaultObject: B): A & B {
         ...object,
     };
 }
+
+export function obj_flat(object: any): any {}

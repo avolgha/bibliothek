@@ -1,4 +1,4 @@
-import leven from "../third_party/leven";
+import leven from "leven";
 
 /**
  * Format a string with templates.
