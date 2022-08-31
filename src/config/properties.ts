@@ -34,7 +34,7 @@ This results to:
 */
 
 import { unflatten } from "flat";
-import { fs_read, fs_write } from "../fs"
+import { fs_read, fs_write } from "../fs";
 
 type Obj = { [key: string]: string };
 
@@ -63,7 +63,9 @@ export default {
     },
 
     save(file: string, object: any) {
-        const string = Object.keys(object).map((key) => `${key}=${object[key]}`).join("\n");
+        const string = Object.keys(object)
+            .map((key) => `${key}=${object[key]}`)
+            .join("\n");
         fs_write(file, string);
-    }
-}
+    },
+};

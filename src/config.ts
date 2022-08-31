@@ -5,7 +5,7 @@ import yaml from "./config/yaml";
 
 /**
  * The type of the configuration.
- * 
+ *
  * Specifications:
  * Type|Url
  * ---|---
@@ -16,10 +16,13 @@ import yaml from "./config/yaml";
  */
 export type ConfigType = "json" | "yaml" | "hocon" | "properties";
 
-const configs: Map<ConfigType, {
-    load(file: string): any;
-    save(file: string, object: any): void;
-}> = new Map([
+const configs: Map<
+    ConfigType,
+    {
+        load(file: string): any;
+        save(file: string, object: any): void;
+    }
+> = new Map([
     ["json", json],
     ["yaml", yaml],
     ["hocon", hocon],
@@ -28,7 +31,7 @@ const configs: Map<ConfigType, {
 
 /**
  * Load an configuration object from a file.
- * 
+ *
  * @param file The file you want to load the configuration from.
  * @param type The type of the configuration.
  * @returns The loaded configuration.
@@ -39,7 +42,7 @@ export function cfg_load(file: string, type: ConfigType) {
 
 /**
  * Save a configuration objec to a file.
- * 
+ *
  * @param file The file you want to save the configuration in.
  * @param object The object you want to save in the configuration file.
  * @param type The type of the configuration

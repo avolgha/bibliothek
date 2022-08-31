@@ -16,10 +16,10 @@ export function obj_default<A, B>(object: A, defaultObject: B): A & B {
 
 /**
  * Flat an object.
- * 
+ *
  * @param object The object you want to flat.
  * @returns The flatten object.
- * 
+ *
  * @example
  * obj_flat({ x: { y: 2 }, z: 4 });
  * // => { "x.y": 2, z: 4 }
@@ -30,11 +30,11 @@ export function obj_flat(object: any): any {
 
 /**
  * Get a key from an object.
- * 
+ *
  * @param object The object you want to get the value from.
  * @param key The key of the value.
  * @returns The value you get through the key and the object.
- * 
+ *
  * @example
  * obj_key({ x: { y: 2 }, z: 4 }, "x.y");
  * // => 2

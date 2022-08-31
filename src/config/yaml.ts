@@ -5,11 +5,11 @@ import { fs_read, fs_write } from "../fs";
  * YAML implementation for the configuration part of this library.
  */
 export default {
-  load(file: string) {
-    return yaml.load(fs_read(file));
-  },
+    load(file: string) {
+        return yaml.load(fs_read(file));
+    },
 
-  save(file: string, object: any) {
-    fs_write(file, yaml.dump(object));
-  }
+    save(file: string, object: any) {
+        fs_write(file, yaml.dump(object));
+    },
 };

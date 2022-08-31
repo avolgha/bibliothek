@@ -103,11 +103,11 @@ export function str_nearest(
 
 /**
  * Repeat a string/ character a specific amount of times to produce a string.
- * 
+ *
  * @param char The string/ character you want to repeat.
  * @param count The amount of times you want to repeat the string/ character.
  * @returns The resulting string.
- * 
+ *
  * @example
  * str_repeat("H", 3);
  * // => HHH

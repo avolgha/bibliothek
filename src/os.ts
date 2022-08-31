@@ -51,7 +51,7 @@ export interface OsSpecResult {
 
 /**
  * Get computer specs like the cpus, the memory or the network interfaces.
- * 
+ *
  * @return The specs from the current computer.
  */
 export function os_spec(): OsSpecResult {
