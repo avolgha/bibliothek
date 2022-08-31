@@ -10,6 +10,10 @@
         "inlineSources": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
-        "declaration": true
+        "declaration": true,
+        "typeRoots": [
+            "types/",
+            "node_modules/@types/"
+        ]
     }
 }

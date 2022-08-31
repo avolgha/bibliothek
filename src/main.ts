@@ -1,6 +1,7 @@
 export * from "./array.js";
 export * from "./assert.js";
 export { BoundNumber } from "./boundNumber.js";
+export { cfg_load, cfg_save } from "./config";
 export * from "./fmt.js";
 export * from "./fs.js";
 export { Logger, log_statement } from "./logger.js";
