@@ -12,7 +12,7 @@ import yaml from "./config/yaml";
  * JSON|https://www.json.org/json-en.html
  * Yaml|https://yaml.org/
  * HOCON|https://github.com/lightbend/config/blob/main/HOCON.md
- * Properties|<key>=<value>
+ * Properties|https://github.com/avolgha/bibliothek/blob/dac77cbc6a6a96a3d745ebd1d0b61f164f2bf239/src/config/properties.ts
  */
 export type ConfigType = "json" | "yaml" | "hocon" | "properties";
 
