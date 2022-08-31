@@ -100,3 +100,18 @@ export function str_nearest(
     else if (amount === 1) return sortedArray[0];
     else if (amount >= 0) return sortedArray.slice(0, amount);
 }
+
+/**
+ * Repeat a string/ character a specific amount of times to produce a string.
+ * 
+ * @param char The string/ character you want to repeat.
+ * @param count The amount of times you want to repeat the string/ character.
+ * @returns The resulting string.
+ * 
+ * @example
+ * str_repeat("H", 3);
+ * // => HHH
+ */
+export function str_repeat(char: string, count: number) {
+    return (count > 0 ? Array(count).fill(char) : []).join("");
+}
