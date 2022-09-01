@@ -1,5 +1,5 @@
 import hocon from "hocon-parser";
-import { fs_read } from "../fs";
+import { fs_read } from "../fs.js";
 
 /**
  * HOCON implementation for the configuration part of this library.

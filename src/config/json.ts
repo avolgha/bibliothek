@@ -1,4 +1,4 @@
-import { fs_json, fs_write } from "../fs";
+import { fs_json, fs_write } from "../fs.js";
 
 /**
  * JSON implementation for the configuration part of this library.

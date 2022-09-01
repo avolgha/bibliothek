@@ -1,5 +1,5 @@
 import yaml from "js-yaml";
-import { fs_read, fs_write } from "../fs";
+import { fs_read, fs_write } from "../fs.js";
 
 /**
  * YAML implementation for the configuration part of this library.

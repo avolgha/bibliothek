@@ -34,7 +34,7 @@ This results to:
 */
 
 import { unflatten } from "flat";
-import { fs_read, fs_write } from "../fs";
+import { fs_read, fs_write } from "../fs.js";
 
 type Obj = { [key: string]: string };
 
