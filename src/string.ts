@@ -1,4 +1,4 @@
-import leven from "leven";
+import leven from "./internal/leven";
 
 /**
  * Format a string with templates.

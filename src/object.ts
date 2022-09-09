@@ -1,4 +1,4 @@
-import { flatten } from "flat";
+import { flatten } from "./internal/flat";
 
 /**
  * Create an object with default options and pass the other object on it.

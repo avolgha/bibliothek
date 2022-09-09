@@ -1,4 +1,4 @@
-import pico from "picocolors";
+import colors from "./internal/colors";
 
 /**
  * Prettify bytes.
@@ -61,15 +61,15 @@ export function fmt_json(json: any): string {
     }
 
     function _num(num: number): string {
-        return pico.yellow(num);
+        return colors.yellow(num);
     }
 
     function _str(str: string): string {
-        return pico.green(`"${str}"`);
+        return colors.green(`"${str}"`);
     }
 
     function _bool(bool: boolean): string {
-        return pico.yellow(bool ? "true" : "false");
+        return colors.yellow(bool ? "true" : "false");
     }
 
     function spaces(times: number): string {
@@ -87,7 +87,7 @@ export function fmt_json(json: any): string {
 
         const keys = Object.keys(obj);
 
-        if (keys.length === 0) return pico.white("{}");
+        if (keys.length === 0) return colors.white("{}");
 
         let str = "{";
 
@@ -99,7 +99,7 @@ export function fmt_json(json: any): string {
             i++;
         }
 
-        return pico.white(`${str}\n${spaces(level * 2)}}`);
+        return colors.white(`${str}\n${spaces(level * 2)}}`);
     }
 
     function _arr(arr: any[], level = 0): string {
@@ -120,15 +120,15 @@ export function fmt_json(json: any): string {
     }
 
     function _fn(fn: Function): string {
-        return pico.cyan(`[Function (${fn.name})]`);
+        return colors.cyan(`[Function (${fn.name})]`);
     }
 
     function _sym(sym: Symbol): string {
-        return pico.green(`[Symbol (${sym.description})]`);
+        return colors.green(`[Symbol (${sym.description})]`);
     }
 
     function _und(_: any): string {
-        return pico.gray("undefined");
+        return colors.gray("undefined");
     }
 
     return _by_type(json)(json);

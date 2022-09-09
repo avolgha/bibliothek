@@ -1,5 +1,5 @@
 import vm from "vm";
-import pico from "picocolors";
+import colors from "./internal/colors";
 import { fmt_json } from "./fmt.js";
 import { obj_default } from "./object.js";
 
@@ -36,10 +36,10 @@ export function log_statement(
     const result = ctx.result;
 
     if (logger) {
-        logger.raw(pico.magenta("statement:"), `${statement} = ${result}\n`);
+        logger.raw(colors.magenta("statement:"), `${statement} = ${result}\n`);
         printContext === true &&
             logger.raw(
-                pico.magenta("statement:"),
+                colors.magenta("statement:"),
                 `=> context: ${fmt_json(context)}\n`
             );
     } else {
@@ -69,28 +69,28 @@ export class Logger {
      * Print an information message to the console.
      */
     info(...args: any[]) {
-        this.#print(process.stdout, pico.green("info:"), ...args, "\n");
+        this.#print(process.stdout, colors.green("info:"), ...args, "\n");
     }
 
     /**
      * Print a debug message to the console.
      */
     debug(...args: any[]) {
-        this.#print(process.stdout, pico.cyan("debug:"), ...args, "\n");
+        this.#print(process.stdout, colors.cyan("debug:"), ...args, "\n");
     }
 
     /**
      * Print a warnin message to the cosole.
      */
     warn(...args: any[]) {
-        this.#print(process.stderr, pico.yellow("warn:"), ...args, "\n");
+        this.#print(process.stderr, colors.yellow("warn:"), ...args, "\n");
     }
 
     /**
      * Print an error message to the console.
      */
     error(...args: any[]) {
-        this.#print(process.stderr, pico.red("error:"), ...args, "\n");
+        this.#print(process.stderr, colors.red("error:"), ...args, "\n");
     }
 
     /**
@@ -111,7 +111,12 @@ export class Logger {
      * Prit formatted json to the console.
      */
     json(object: any) {
-        this.#print(process.stdout, pico.gray("json:"), fmt_json(object), "\n");
+        this.#print(
+            process.stdout,
+            colors.gray("json:"),
+            fmt_json(object),
+            "\n"
+        );
     }
 
     /**
