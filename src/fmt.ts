@@ -119,8 +119,8 @@ export function fmt_json(json: any): string {
         return `${str}\n${spaces(level * 2)}]`;
     }
 
-    function _fn(_: any): string {
-        return pico.cyan("[Function]");
+    function _fn(fn: Function): string {
+        return pico.cyan(`[Function (${fn.name})]`);
     }
 
     function _sym(sym: Symbol): string {
