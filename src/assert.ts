@@ -1,5 +1,5 @@
-import { Logger } from "./logger.js";
-import { num_between } from "./number.js";
+import { Logger } from "./logger";
+import { num_between } from "./number";
 
 const assertLogger = new Logger();
 

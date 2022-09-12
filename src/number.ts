@@ -1,4 +1,4 @@
-import { BoundNumber } from "./boundNumber.js";
+import { BoundNumber } from "./boundNumber";
 
 /**
  * Get all numbers in a range of numbers.

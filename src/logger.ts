@@ -1,7 +1,7 @@
 import vm from "vm";
 import colors from "./internal/colors";
-import { fmt_json } from "./fmt.js";
-import { obj_default } from "./object.js";
+import { fmt_json } from "./fmt";
+import { obj_default } from "./object";
 
 /**
  * Execute a given statement in a virtual machine and then log the result.

@@ -1,4 +1,4 @@
-import { num_between_inc } from "./number.js";
+import { num_between_inc } from "./number";
 
 /**
  * Configuration options for a BoundNumber

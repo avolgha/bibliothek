@@ -1,7 +1,7 @@
-import hocon from "./config/hocon.js";
-import json from "./config/json.js";
-import properties from "./config/properties.js";
-import yaml from "./config/yaml.js";
+import hocon from "./config/hocon";
+import json from "./config/json";
+import properties from "./config/properties";
+import yaml from "./config/yaml";
 
 /**
  * The type of the configuration.
