@@ -44,10 +44,6 @@ To format, we run `prettier` with options specified in `.vscode/settings.json`.
 Source files have to be included in `src/` directory, except added type
 declarations.
 
-Relative file imports have to end with the file extensions: (`./fs` -> `./fs.js`).  
-This is not required because of `tsup` (the bundling tool) but rather because
-we want it to be readable.
-
 ## Support
 
 If you want to contact me or you have a problem, you can write me
