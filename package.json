@@ -1,6 +1,6 @@
 {
     "name": "bibliothek",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "library containing some things",
     "exports": "./build/main.js",
     "types": "./build/main.d.ts",
@@ -18,7 +18,8 @@
     "scripts": {
         "prepareRelease": "node scripts/prepareRelease.js",
         "start": "node -r source-map-support/register",
-        "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
+        "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts",
+        "postinstall": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts",
     },
     "homepage": "https://github.com/avolgha/bibliothek",
     "repository": {
