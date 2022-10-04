@@ -29,37 +29,26 @@ export function arr_flat<T>(array: T[][]): T[] {
     return array.flat();
 }
 
-// TODO: array#arr_delete : replace function with array.slice.
 /**
  * Delete an item from an array.
  *
- * **Warning**: the forceFullRemove parameter exists, because you might want to have some values that are null or undefined in the array.
- * JavaScript limits us by only giving the delete-keyword. But this does not delete a value but rather replaces it with null. So we have
- * this parameter if you want to have this null in your array.
- *
  * @param array The given array where the item should be deleted.
  * @param item The index of the item.
- * @param forceFullRemove Determine whether the array should be checked for non-null afterwards. (Default: true)
  *
  * @return The array without the unwanted element.
  *
  * @example
- * arr_delete([ 1, 2 ], 1);
+ * arr_delete([ 1, 2 ], 0);
  * // => [ 2 ]
- *
- * @example
- * arr_delete([ 1, 2 ], 1, false);
- * // => [ null, 2 ]
  */
 export function arr_delete<T>(
     array: T[],
-    item: number,
-    forceFullRemove = true
+    item: number
 ): T[] {
-    delete array[item];
-    return !forceFullRemove
-        ? array
-        : array.filter((current) => current !== null && current !== undefined);
+    if (item === 0) return array.slice(1);
+    else if ((item + 1) >= array.length) throw new Error("array index out of bounds");
+    else if ((item + 1) === array.length) return array.slice(0, -1);
+    else return [...array.slice(0, item), ...array.slice(item + 1)];
 }
 
 /**
