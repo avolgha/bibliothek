@@ -33,7 +33,7 @@ This results to:
 
 */
 
-import { unflatten } from "flat";
+import { unflatten } from "../internal/flat";
 import { fs_read, fs_write } from "../fs";
 
 type Obj = { [key: string]: string };
