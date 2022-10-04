@@ -10,3 +10,4 @@ export * from "./number";
 export * from "./object";
 export * from "./os";
 export * from "./string";
+export * from "./typescript";

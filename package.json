@@ -36,5 +36,8 @@
     "dependencies": {
         "hocon-parser": "^1.0.1",
         "js-yaml": "^4.1.0"
+    },
+    "peerDependencies": {
+        "esbuild": "^0.15.10"
     }
 }
