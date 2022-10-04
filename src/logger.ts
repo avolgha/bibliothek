@@ -55,7 +55,7 @@ export function log_statement(
  * Simple Logger implementation.
  */
 export class Logger {
-    constructor() {
+    constructor(public _debugMode = Object.keys(process.env).includes("DEBUG")) {
         if (!process || !process.stdout || !process.stderr) {
             throw "error: for the logger, we require to have a node.js environment or a node.js procss-like constant set";
         }
@@ -74,9 +74,11 @@ export class Logger {
 
     /**
      * Print a debug message to the console.
+     * 
+     * The output of this function is controlled by the variable `_debugMode`.
      */
     debug(...args: any[]) {
-        this.#print(process.stdout, colors.cyan("debug:"), ...args, "\n");
+        this._debugMode && this.#print(process.stdout, colors.cyan("debug:"), ...args, "\n");
     }
 
     /**
@@ -127,5 +129,12 @@ export class Logger {
         console.debug = this.debug;
         console.warn = this.warn;
         console.error = this.error;
+    }
+
+    /**
+     * Controle whether the Logger should print out debug messages.
+     */
+    setDebugMode(state: boolean) {
+        this._debugMode = state;
     }
 }
