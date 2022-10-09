@@ -1,3 +1,4 @@
+import fs from "fs";
 import vm from "vm";
 import colors from "./internal/colors";
 import { fmt_json } from "./fmt";
@@ -52,9 +53,26 @@ export function log_statement(
 }
 
 /**
+ * Interface for declaring what an Logger should look like in our library.
+ * 
+ * For implementations, see:
+ * - Logger
+ * - FullLogger
+ */
+export interface ILogger {
+    info(...args: any[]): void;
+    debug(...args: any[]): void;
+    warn(...args: any[]): void;
+    error(...args: any[]): void;
+    raw(...args: any[]): void;
+    time(): void;
+    json(object: any): void;
+}
+
+/**
  * Simple Logger implementation.
  */
-export class Logger {
+export class Logger implements ILogger {
     constructor(public _debugMode = Object.keys(process.env).includes("DEBUG")) {
         if (!process || !process.stdout || !process.stderr) {
             throw "error: for the logger, we require to have a node.js environment or a node.js procss-like constant set";
@@ -136,5 +154,80 @@ export class Logger {
      */
     setDebugMode(state: boolean) {
         this._debugMode = state;
+    }
+}
+
+export interface FullLoggerOutputDeviceFile {
+    path: string;
+}
+
+export type FullLoggerOutputDeviceWritable = {
+    write(chunk: string): void;
+}
+
+export type FullLoggerOutputDevice = FullLoggerOutputDeviceWritable | FullLoggerOutputDeviceFile;
+
+/**
+ * An a bit more complex logger implementation that can handle file and writable outputs.
+ * 
+ * In the constructor, you need to provide the device (file or writable) you want to print to.
+ */
+export class FullLogger implements ILogger {
+    constructor(public device: FullLoggerOutputDevice) {
+        if (!device) {
+            throw "error: full logger has to be configured with an output device.";
+        }
+    }
+
+    #ctime() {
+        return new Date().toLocaleString();
+    }
+
+    #printR(...args: any[]) {
+        if (Object.hasOwn(this.device, "path")) {
+            const { path } = this.device as FullLoggerOutputDeviceFile;
+
+            if (!fs.existsSync(path)) {
+                fs.writeFileSync(path, "");
+            }
+
+            fs.writeFileSync(path, args.join(" "));
+        } else {
+            const writable = this.device as FullLoggerOutputDeviceWritable;
+
+            writable.write(args.join(" "));
+        }
+    }
+
+    #print(...args: any[]) {
+        this.#printR(`[${this.#ctime()}]`, ...args);
+    }
+
+    info(...args: any[]): void {
+        this.#print("[info]", ...args);
+    }
+
+    debug(...args: any[]): void {
+        this.#print("[debug]", ...args);
+    }
+
+    warn(...args: any[]): void {
+        this.#print("[warn]", ...args);
+    }
+
+    error(...args: any[]): void {
+        this.#print("[error]", ...args);
+    }
+
+    raw(...args: any[]): void {
+        this.#printR(...args);
+    }
+
+    time(): void {
+        this.#printR(this.#ctime());
+    }
+
+    json(object: any): void {
+        this.#print("[json]", JSON.stringify(object, undefined, 4));
     }
 }
