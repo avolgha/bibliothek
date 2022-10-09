@@ -5,7 +5,7 @@ export { cfg_load, cfg_save } from "./config";
 export * from "./fmt";
 export * from "./fs";
 export * from "./lazy";
-export { Logger, log_statement } from "./logger";
+export { FullLogger, ILogger, Logger, log_statement } from "./logger";
 export * from "./number";
 export * from "./object";
 export * from "./os";
