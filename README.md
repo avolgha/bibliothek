@@ -1,3 +1,6 @@
+|**Warning**: This code is behind the current state of the `dev` branch. If you want the current code, please build it yourself.|
+|---|
+
 # bibliothek
 
 a few utility functions I won't use but wrote anyway lol.
