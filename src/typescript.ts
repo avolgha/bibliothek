@@ -3,6 +3,7 @@ import fs from "fs";
 import fsp from "fs/promises";
 import os from "os";
 import path from "path";
+import nodeVm from "vm";
 
 /**
  * Execute a single TypeScript-file.
@@ -11,10 +12,11 @@ import path from "path";
  * 
  * @param scriptFile The name of the TypeScript-source file that you want to execute.
  * @param printTime Determine whether the time we needed for compiling and executing should be printed after the execution.
+ * @param vm Determine whether the script should be run in a vm or with a shell-process.
  * 
  * @return The amount of time the function needed to compile and execute the script.
  */
-export async function run_typescript(scriptFile: string, printTime = false) {
+export async function run_typescript(scriptFile: string, printTime = false, vm = false) {
     scriptFile = path.resolve(scriptFile);
     if (!fs.existsSync(scriptFile)) {
         throw new Error("bibliothek-typescript: requested script file does not exists: " + scriptFile);
@@ -47,32 +49,36 @@ export async function run_typescript(scriptFile: string, printTime = false) {
         });
     }
 
-    await fsp.writeFile(jsPath, result.code, "utf-8");
+    if (vm) {
+        const vmResult = nodeVm.runInNewContext(result.code, undefined, { filename: path.basename(scriptFile) });
 
-    await (() => {
-        return new Promise<void>((res, rej) => {
-            const proc = child.spawn("node", [jsPath], {
-                cwd: tmpPath,
-                env: process.env,
+        console.log("bibliothek-typescript [vm-result]:", vmResult);
+    } else {
+        await fsp.writeFile(jsPath, result.code, "utf-8");
+        await (() => {
+            return new Promise<void>((res, rej) => {
+                const proc = child.spawn("node", [jsPath], {
+                    cwd: tmpPath,
+                    env: process.env,
+                });
+
+                const trimLog = (txt: Buffer) => {
+                    let res = txt.toString("utf-8");
+                    res = res.trim();
+                    if (res.endsWith("\n")) res = res.substring(0, res.length - "\n".length);
+                    return res;
+                };
+
+                proc.stdout.on("data", (chunk) => console.log("bibliothek-typescript [stdout]: " + trimLog(chunk)));
+                proc.stderr.on("data", (chunk) => console.log("bibliothek-typescript [stderr]: " + trimLog(chunk)));
+
+                proc.on("close", (code) => {
+                    code === 0 ? res() : rej();
+                });
             });
-
-            const trimLog = (txt: Buffer) => {
-                let res = txt.toString("utf-8");
-                res = res.trim();
-                if (res.endsWith("\n")) res = res.substring(0, res.length - "\n".length);
-                return res;
-            };
-
-            proc.stdout.on("data", (chunk) => console.log("bibliothek-typescript [stdout]: " + trimLog(chunk)));
-            proc.stderr.on("data", (chunk) => console.log("bibliothek-typescript [stderr]: " + trimLog(chunk)));
-
-            proc.on("close", (code) => {
-                code === 0 ? res() : rej();
-            });
-        });
-    })();
-
-    await fsp.rm(tmpPath, { recursive: true });
+        })();
+        await fsp.rm(tmpPath, { recursive: true });
+    }
 
     const end = new Date().getTime();
     const timeNeeded = end - start; // in "ms"
