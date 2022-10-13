@@ -8,7 +8,7 @@ export default {
         return fs_json(file);
     },
 
-    save(file: string, object: any) {
+    save(file: string, object: unknown) {
         fs_write(file, JSON.stringify(object, undefined, 4));
     },
 };

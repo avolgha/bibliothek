@@ -44,7 +44,7 @@ type Obj = { [key: string]: string };
 export default {
     load(file: string) {
         const content = fs_read(file);
-        let object: Obj = {};
+        const object: Obj = {};
 
         for (const line of content.split("\n")) {
             if (line.trim().replaceAll("\n", "") === "") continue;
@@ -62,7 +62,7 @@ export default {
         return unflatten(object);
     },
 
-    save(file: string, object: any) {
+    save(file: string, object: { [key: string]: unknown }) {
         const string = Object.keys(object)
             .map((key) => `${key}=${object[key]}`)
             .join("\n");

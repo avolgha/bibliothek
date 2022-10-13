@@ -9,7 +9,7 @@ export default {
         return hocon.parseHocon(fs_read(file));
     },
 
-    save(_file: string, _object: any) {
+    save() {
         throw "no implementation for saving HOCON-configuration files.";
     },
 };

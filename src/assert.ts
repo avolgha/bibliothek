@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { Logger } from "./logger";
 import { num_between } from "./number";
 
@@ -46,7 +48,7 @@ export function assert_between(
     assert(num_between(value, max, min), message);
 }
 
-export function assert_number(value: any, message: string): number {
+export function assert_number(value: unknown, message: string): number {
     if (typeof value === "number") {
         return value;
     } else if (typeof value === "string") {

@@ -24,7 +24,9 @@ export function obj_default<A, B = A>(object: A, defaultObject: B): A & B {
  * obj_flat({ x: { y: 2 }, z: 4 });
  * // => { "x.y": 2, z: 4 }
  */
-export function obj_flat(object: any): any {
+export function obj_flat(object: unknown): {
+    [key: string]: unknown;
+} {
     return flatten(object);
 }
 
@@ -39,6 +41,6 @@ export function obj_flat(object: any): any {
  * obj_key({ x: { y: 2 }, z: 4 }, "x.y");
  * // => 2
  */
-export function obj_key(object: any, key: string): any {
+export function obj_key(object: unknown, key: string): unknown {
     return obj_flat(object)[key];
 }

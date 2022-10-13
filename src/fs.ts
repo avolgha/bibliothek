@@ -48,6 +48,6 @@ export function fs_read(path: string): string {
  *
  * @return The parsed JSON.
  */
-export function fs_json<T = any>(path: string): T {
+export function fs_json<T = unknown>(path: string): T {
     return JSON.parse(fs_read(path)) as T;
 }

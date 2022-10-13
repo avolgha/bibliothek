@@ -1,4 +1,5 @@
 /* taken and modified from flat by hughsk | https://github.com/hughsk/flat | BSD-3-Clause License : https://github.com/hughsk/flat/blob/master/LICENSE */
+/* eslint-disable */
 
 function isBuffer(obj: any) {
     return (

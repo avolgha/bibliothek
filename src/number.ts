@@ -131,6 +131,6 @@ export function num_between_inc(
  * num_rand(5, 0);
  * // => 0 <= x <= 5
  */
-export function num_rand(max: number, min: number = 0): number {
+export function num_rand(max: number, min = 0): number {
     return Math.random() * (max - min) + min;
 }

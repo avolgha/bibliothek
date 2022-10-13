@@ -60,13 +60,13 @@ export function log_statement(
  * - FullLogger
  */
 export interface ILogger {
-    info(...args: any[]): void;
-    debug(...args: any[]): void;
-    warn(...args: any[]): void;
-    error(...args: any[]): void;
-    raw(...args: any[]): void;
+    info(...args: unknown[]): void;
+    debug(...args: unknown[]): void;
+    warn(...args: unknown[]): void;
+    error(...args: unknown[]): void;
+    raw(...args: unknown[]): void;
     time(): void;
-    json(object: any): void;
+    json(object: unknown): void;
 }
 
 /**
@@ -79,14 +79,14 @@ export class Logger implements ILogger {
         }
     }
 
-    #print(std: NodeJS.WriteStream, ...args: any[]) {
+    #print(std: NodeJS.WriteStream, ...args: unknown[]) {
         std.write(args.join(" "));
     }
 
     /**
      * Print an information message to the console.
      */
-    info(...args: any[]) {
+    info(...args: unknown[]) {
         this.#print(process.stdout, colors.green("info:"), ...args, "\n");
     }
 
@@ -95,28 +95,28 @@ export class Logger implements ILogger {
      * 
      * The output of this function is controlled by the variable `_debugMode`.
      */
-    debug(...args: any[]) {
+    debug(...args: unknown[]) {
         this._debugMode && this.#print(process.stdout, colors.cyan("debug:"), ...args, "\n");
     }
 
     /**
      * Print a warnin message to the cosole.
      */
-    warn(...args: any[]) {
+    warn(...args: unknown[]) {
         this.#print(process.stderr, colors.yellow("warn:"), ...args, "\n");
     }
 
     /**
      * Print an error message to the console.
      */
-    error(...args: any[]) {
+    error(...args: unknown[]) {
         this.#print(process.stderr, colors.red("error:"), ...args, "\n");
     }
 
     /**
      * Print a raw message to the console.
      */
-    raw(...args: any[]) {
+    raw(...args: unknown[]) {
         this.#print(process.stdout, ...args);
     }
 
@@ -130,7 +130,7 @@ export class Logger implements ILogger {
     /**
      * Prit formatted json to the console.
      */
-    json(object: any) {
+    json(object: unknown) {
         this.#print(
             process.stdout,
             colors.gray("json:"),
@@ -183,7 +183,7 @@ export class FullLogger implements ILogger {
         return new Date().toLocaleString();
     }
 
-    #printR(...args: any[]) {
+    #printR(...args: unknown[]) {
         if (Object.hasOwn(this.device, "path")) {
             const { path } = this.device as FullLoggerOutputDeviceFile;
 
@@ -199,27 +199,27 @@ export class FullLogger implements ILogger {
         }
     }
 
-    #print(...args: any[]) {
+    #print(...args: unknown[]) {
         this.#printR(`[${this.#ctime()}]`, ...args);
     }
 
-    info(...args: any[]): void {
+    info(...args: unknown[]): void {
         this.#print("[info]", ...args);
     }
 
-    debug(...args: any[]): void {
+    debug(...args: unknown[]): void {
         this.#print("[debug]", ...args);
     }
 
-    warn(...args: any[]): void {
+    warn(...args: unknown[]): void {
         this.#print("[warn]", ...args);
     }
 
-    error(...args: any[]): void {
+    error(...args: unknown[]): void {
         this.#print("[error]", ...args);
     }
 
-    raw(...args: any[]): void {
+    raw(...args: unknown[]): void {
         this.#printR(...args);
     }
 
@@ -227,7 +227,7 @@ export class FullLogger implements ILogger {
         this.#printR(this.#ctime());
     }
 
-    json(object: any): void {
+    json(object: unknown): void {
         this.#print("[json]", JSON.stringify(object, undefined, 4));
     }
 }

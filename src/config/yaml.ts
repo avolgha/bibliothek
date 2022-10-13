@@ -9,7 +9,7 @@ export default {
         return yaml.load(fs_read(file));
     },
 
-    save(file: string, object: any) {
+    save(file: string, object: unknown) {
         fs_write(file, yaml.dump(object));
     },
 };

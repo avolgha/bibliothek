@@ -184,7 +184,7 @@ export class BoundNumber {
      *
      * @param digits The number of digits after the comma.
      */
-    str(digits: number = 0): string {
+    str(digits = 0): string {
         return digits <= 0 ? "" + this.value : this.value.toFixed(digits);
     }
 }

@@ -40,8 +40,10 @@ export function fmt_bytes(bytes: number): string {
  *
  * @return The result string.
  */
-export function fmt_json(json: any): string {
-    function _by_type(some: any): (x: any, level?: number) => string {
+export function fmt_json(json: unknown): string {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function _by_type(some: unknown): (x: any, level?: number) => string {
+        /* eslint-disable indent */
         switch (typeof some) {
             case "string":
                 return _str;
@@ -58,6 +60,7 @@ export function fmt_json(json: any): string {
             default:
                 return !some ? _und : Array.isArray(some) ? _arr : _obj;
         }
+        /* eslint-enable indent */
     }
 
     function _num(num: number): string {
@@ -80,7 +83,7 @@ export function fmt_json(json: any): string {
         return str;
     }
 
-    function _obj(obj: any, level = 0): string {
+    function _obj(obj: { [key: string]: unknown }, level = 0): string {
         function _fmt_key(key: string): string {
             return key.includes(" ") ? `"${key}"` : key;
         }
@@ -102,7 +105,7 @@ export function fmt_json(json: any): string {
         return colors.white(`${str}\n${spaces(level * 2)}}`);
     }
 
-    function _arr(arr: any[], level = 0): string {
+    function _arr(arr: unknown[], level = 0): string {
         if (arr.length === 0) return "[]";
 
         let str = "[";
@@ -119,15 +122,15 @@ export function fmt_json(json: any): string {
         return `${str}\n${spaces(level * 2)}]`;
     }
 
-    function _fn(fn: Function): string {
+    function _fn(fn: (...args: unknown[]) => unknown): string {
         return colors.cyan(`[Function (${fn.name})]`);
     }
 
-    function _sym(sym: Symbol): string {
+    function _sym(sym: symbol): string {
         return colors.green(`[Symbol (${sym.description})]`);
     }
 
-    function _und(_: any): string {
+    function _und(): string {
         return colors.gray("undefined");
     }
 

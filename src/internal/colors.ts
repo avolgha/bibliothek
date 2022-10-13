@@ -12,13 +12,13 @@ const isColorSupported =
 
 const formatter =
     (open: string, close: string, replace = open) =>
-    (input: string | number | null | undefined) => {
-        let string = "" + input;
-        let index = string.indexOf(close, open.length);
-        return ~index
-            ? open + replaceClose(string, close, replace, index) + close
-            : open + string + close;
-    };
+        (input: string | number | null | undefined) => {
+            const string = "" + input;
+            const index = string.indexOf(close, open.length);
+            return ~index
+                ? open + replaceClose(string, close, replace, index) + close
+                : open + string + close;
+        };
 
 const replaceClose: (
     string: string,
@@ -26,9 +26,9 @@ const replaceClose: (
     replace: string,
     index: number
 ) => string = (string, close, replace, index) => {
-    let start = string.substring(0, index) + replace;
-    let end = string.substring(index + close.length);
-    let nextIndex = end.indexOf(close);
+    const start = string.substring(0, index) + replace;
+    const end = string.substring(index + close.length);
+    const nextIndex = end.indexOf(close);
     return ~nextIndex
         ? start + replaceClose(end, close, replace, nextIndex)
         : start + end;

@@ -19,6 +19,7 @@ import leven from "./internal/leven";
  */
 export function str_fmt(
     template: string,
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     objects: any[],
     config: { replace: string } = { replace: "{}" }
 ): string {
@@ -86,7 +87,7 @@ export function str_nearest(
     amount = 1
 ): string | string[] | undefined {
     if (search.length === 0) return undefined;
-    let distances: { [s: string]: number } = {};
+    const distances: { [s: string]: number } = {};
     const sortedArray = search
         .sort(
             (first, second) =>

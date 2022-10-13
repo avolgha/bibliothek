@@ -19,8 +19,8 @@ export type ConfigType = "json" | "yaml" | "hocon" | "properties";
 const configs: Map<
     ConfigType,
     {
-        load(file: string): any;
-        save(file: string, object: any): void;
+        load(file: string): unknown;
+        save(file: string, object: unknown): void;
     }
 > = new Map([
     ["json", json],
@@ -47,6 +47,6 @@ export function cfg_load(file: string, type: ConfigType) {
  * @param object The object you want to save in the configuration file.
  * @param type The type of the configuration
  */
-export function cfg_save(file: string, object: any, type: ConfigType) {
+export function cfg_save(file: string, object: unknown, type: ConfigType) {
     configs.get(type)?.save(file, object);
 }
