@@ -2,6 +2,13 @@
 
 a few utility functions I won't use but wrote anyway lol.
 
+## Experimental
+
+Currently, there is an experimental file `src/cli.ts` where I add cli-related stuff.
+
+To use it, you need to build it yourself via the `package:cli` script.  
+This will bundle the file with its dependencies to `build-cli/cli.js`.
+
 ## Installation
 
 You can install the library with `npm install bibliothek` or `yarn add bibliothek` (prefered).  

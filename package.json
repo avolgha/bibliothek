@@ -23,6 +23,7 @@
         "prepareRelease": "node scripts/prepareRelease.js",
         "start": "node -r source-map-support/register",
         "package": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts",
+        "package:cli": "tsup -d build-cli --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/cli.ts",
         "postinstall": "tsup -d build --format esm --minify --keep-names --target esnext --dts --sourcemap inline --tsconfig tsconfig.json src/main.ts"
     },
     "homepage": "https://github.com/avolgha/bibliothek",
