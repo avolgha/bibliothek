@@ -104,6 +104,7 @@ class VirtualFileSystem implements FileSystem {
     read<T = string>(path: string, parser?: ((input: string) => T) | undefined): T | undefined {
         if (!this.exists(path)) return undefined;
         const data = this.#buffers[path];
+        /* eslint-disable-next-line */
         //@ts-ignore -- when parser is not available, T should always be a string, so no check needed (i hope)
         if (!parser) return data;
         return parser(data);
@@ -121,12 +122,15 @@ class VirtualFileSystem implements FileSystem {
         return this.#buffers[path] !== undefined;
     }
 
+    /* eslint-disable-next-line */
     type(_path: string): "file" | "directory" | undefined {
         return undefined;
     }
 
+    /* eslint-disable-next-line */
     create(_path: string): void { }
 
+    /* eslint-disable-next-line */
     mkdir(_path: string): void { }
 }
 
@@ -135,12 +139,13 @@ class RelativeFileSystem implements FileSystem {
 
     write(path: string, content: string, type: "append" | "overwrite" = "overwrite"): void {
         const currentData = type === "append" ? (this.read(path) || "") + "\n" : "";
-        nodeFs.writeFileSync(nodePath.join(this.rDir, path), currentData + content)
+        nodeFs.writeFileSync(nodePath.join(this.rDir, path), currentData + content);
     }
 
     read<T = string>(path: string, parser?: ((input: string) => T)): T | undefined {
         if (!this.exists(path)) return undefined;
         const data = nodeFs.readFileSync(nodePath.join(this.rDir, path), "utf-8");
+        /* eslint-disable-next-line */
         //@ts-ignore -- when parser is not available, T should always be a string, so no check needed (i hope)
         if (!parser) return data;
         return parser(data);
@@ -181,12 +186,13 @@ class RelativeFileSystem implements FileSystem {
 class AbsoluteFileSystem implements FileSystem {
     write(path: string, content: string, type: "append" | "overwrite" = "overwrite"): void {
         const currentData = type === "append" ? (this.read(path) || "") + "\n" : "";
-        nodeFs.writeFileSync(path, currentData + content)
+        nodeFs.writeFileSync(path, currentData + content);
     }
 
     read<T = string>(path: string, parser?: ((input: string) => T)): T | undefined {
         if (!this.exists(path)) return undefined;
         const data = nodeFs.readFileSync(path, "utf-8");
+        /* eslint-disable-next-line */
         //@ts-ignore -- when parser is not available, T should always be a string, so no check needed (i hope)
         if (!parser) return data;
         return parser(data);
