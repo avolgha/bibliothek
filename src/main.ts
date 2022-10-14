@@ -3,6 +3,7 @@ export * from "./assert";
 export { BoundNumber } from "./boundNumber";
 export { cfg_load, cfg_save } from "./config";
 export * from "./fmt";
+export * from "./filesystem";
 export * from "./fs";
 export * from "./lazy";
 export { FullLogger, ILogger, Logger, log_statement } from "./logger";
